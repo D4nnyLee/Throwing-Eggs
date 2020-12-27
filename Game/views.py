@@ -40,7 +40,7 @@ transitions = [
     },
     {
         'trigger': 'goto_reset',
-        'source': ['idle', 'judge'],
+        'source': 'judge',
         'dest': 'reset'
     },
     {
@@ -68,7 +68,7 @@ transitions = [
         'conditions': 'answer'
     },
 ]
-initial = 'idle'
+initial = 'reset'
 auto_transitions = False
 show_conditions = True
 
@@ -95,20 +95,23 @@ def webhook(request):
             if event.source.type != 'user':
                 continue
 
+            uid = event.source.user_id
+
             try:
-                player = Player.objects.get(user_id = event.source.user_id)
+                player = Player.objects.get(user_id = uid)
                 machine = pickle.loads(player.machine)
             except Player.DoesNotExist:
                 machine = GameMachine(
+                    user_id = uid,
                     states = states,
                     transitions = transitions,
                     initial = initial,
                     auto_transitions = auto_transitions,
                     show_conditions = show_conditions,
                 )
-                machine.goto_reset(event)
+                machine.go_back()
 
-                player = Player.objects.create(user_id = event.source.user_id)
+                player = Player.objects.create(user_id = uid)
 
             machine.advance(event)
             player.machine = pickle.dumps(machine)
@@ -118,6 +121,7 @@ def webhook(request):
 
 def get_fsm(request):
     machine = GameMachine(
+        user_id = 'dummy',
         states = states,
         transitions = transitions,
         initial = initial,

@@ -5,8 +5,9 @@ from transitions.extensions import GraphMachine
 from Game.utils import send_push_message, send_reply_message
 
 class GameMachine(GraphMachine):
-    def __init__(self, **machine_configs):
+    def __init__(self, user_id, **machine_configs):
         self.machine = GraphMachine(model = self, **machine_configs)
+        self.user_id = user_id
         self.ans = 0
         self.remain_times = 0
         self.remain_eggs = 0
@@ -27,8 +28,11 @@ class GameMachine(GraphMachine):
         return len(param) == 2 and param[0] == '!' and param[1].isdigit()
 
     def on_enter_reset(self, event):
+        self.go_back()
+
+    def on_exit_reset(self):
         send_push_message(
-                user_id = event.source.user_id,
+                user_id = self.user_id,
                 text = '''Now you have 3 eggs, I want to know the
 MAX number X such that the egg won't break
 if I throw it from Xth floor of the building.
@@ -49,8 +53,6 @@ you can try to figure out how to do that. ^^)'''
         self.remain_times = 30
         self.remain_eggs = 3
         self.ans = struct.unpack('>Q', os.urandom(8))[0] % 1001 # answer is 0 ~ 1000
-
-        self.go_back()
 
     def on_enter_usage(self, event):
         send_reply_message(
