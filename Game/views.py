@@ -129,6 +129,6 @@ def get_fsm(request):
         show_conditions = show_conditions,
     )
 
-    machine.get_graph().draw('Game/static/fsm.png', prog = 'dot')
+    machine.get_graph().draw('Game/static/fsm.jpg', prog = 'dot')
 
     return render(request, 'show_fsm.html')
