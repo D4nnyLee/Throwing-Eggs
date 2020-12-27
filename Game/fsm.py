@@ -29,25 +29,21 @@ class GameMachine(GraphMachine):
     def on_enter_reset(self, event):
         send_push_message(
                 user_id = event.source.user_id,
-                text = '''Now you have 3 eggs, I want to know the number X
-such that the egg won't break if I throw it from 
-Xth floor of a building, but it will break if it's
-thrown from (X + 1)th floor.
+                text = '''Now you have 3 eggs, I want to know the
+MAX number X such that the egg won't break
+if I throw it from Xth floor of the building.
 
 The range for X is 0 ~ 1000.
 
-Note that the egg won't break if you throw it from
-1st ~ Xth floor, and it will break if it's thrown
-from (X + 1)th to 1001th floor. If the egg is not
-broken, it will be thrown in next trial.
+Note that if the egg is not broken,
+it will be thrown in the next trial.
 
-Please help me to find the number X in at most 30 trials.
+Please help me to find the number X within at most 30 trials.
 
 Type "help" for more information.
 
 (It's always possible to find X in such restriction, 
-you can try to figure out how to do that. ^^)
-'''
+you can try to figure out how to do that. ^^)'''
         )
 
         self.remain_times = 30
@@ -59,11 +55,11 @@ you can try to figure out how to do that. ^^)
     def on_enter_usage(self, event):
         send_reply_message(
                 reply_token = event.reply_token,
-                text = '''# : Get the information of remain query times and eggs.
-? <xxx> : Query the result of throwing egg from <xxx>th floor.
-! <xxx> : Send the answer and check whether correct or not.
-None of above : Print this message.
-'''
+                text = '''Usage:
+    # : Get the information of remain throwing times and eggs.
+    ? N : Query the result of throwing egg from Nth floor.
+    ! N : Check whether N is the answer or not.
+    None of above : Print this message.'''
         )
 
         self.go_back()
@@ -71,8 +67,7 @@ None of above : Print this message.
     def on_enter_info(self, event):
         status = f'''Remain:
     Eggs:  {self.remain_eggs}
-    Times: {self.remain_times}
-    '''
+    Times: {self.remain_times}'''
 
         send_reply_message(
             reply_token = event.reply_token,
