@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'cma22lfdw)ru1k=5=dfrgo%1m1x2zasor#u&_m@$nvcv)=86mj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://throwingeggs.herokuapp.com']
 
 
 # Application definition
