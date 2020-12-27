@@ -1,1 +1,1 @@
-web: export PORT=8000; python manage.py migrate; python manage.py runserver
+web: python manage.py collectstatic; python manage.py migrate; python manage.py runserver
