@@ -26,7 +26,7 @@ SECRET_KEY = 'cma22lfdw)ru1k=5=dfrgo%1m1x2zasor#u&_m@$nvcv)=86mj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['throwingeggs.herokuapp.com/']
+ALLOWED_HOSTS = ['throwingeggs.herokuapp.com']
 
 
 # Application definition
