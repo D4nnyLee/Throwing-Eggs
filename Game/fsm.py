@@ -43,6 +43,7 @@ Note that if the egg is not broken,
 it will be thrown in the next trial.
 
 Please help me to find the number X within at most 30 trials.
+You only have 1 chance to check the answer.
 
 Type "help" for more information.
 
@@ -60,7 +61,7 @@ you can try to figure out how to do that. ^^)'''
                 text = '''Usage:
     # : Get the information of remain throwing times and eggs.
     ? N : Query the result of throwing egg from Nth floor.
-    ! N : Check whether N is the answer or not.
+    ! N : Check whether N is the answer or not and restart game.
     None of above : Print this message.'''
         )
 
