@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 
@@ -80,8 +81,8 @@ def webhook(request):
 
         try:
             events = parser.parse(
-                    request.body.decode('utf-8'),
-                    request.headers['X-Line-Signature']
+                request.body.decode('utf-8'),
+                request.headers['X-Line-Signature']
             )
         except InvalidSignatureError:
             return HttpResponseBadRequest()
@@ -114,3 +115,16 @@ def webhook(request):
             player.save()
 
     return HttpResponse('OK')
+
+def get_fsm(request):
+    machine = GameMachine(
+        states = states,
+        transitions = transitions,
+        initial = initial,
+        auto_transitions = auto_transitions,
+        show_conditions = show_conditions,
+    )
+
+    machine.get_graph().draw('static/Game/fsm.png', prog = 'dot', format = 'png')
+
+    return render(request, 'show_fsm.html')

@@ -19,5 +19,6 @@ from Game import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('webhook/', views.webhook),
+    path('webhook', views.webhook),
+    path('get-fsm', views.get_fsm),
 ]
