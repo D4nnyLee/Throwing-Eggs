@@ -40,7 +40,7 @@ if I throw it from Xth floor of the building.
 The range for X is 0 ~ 1000.
 
 Note that if the egg is not broken,
-it will be thrown in the next trial.
+it will be thrown again in the next trial.
 
 Please help me to find the number X within at most 30 trials.
 You only have 1 chance to check the answer.
