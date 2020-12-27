@@ -1,8 +1,8 @@
 # Throwing Eggs
 
-This is a django-based line bot that provide a little game to play.
-
 ## Introduction
+
+This is a django-based line bot that provide a little game to play.
 
 ### Scenario
 
@@ -24,6 +24,10 @@ Different input has different function.
 * `#` : Get the information of remain throwing times and eggs.
 * `? N` : Query the result of throwing egg from Nth floor.
 * `! N` : Check whether N is the answer or not and restart game.
+
+## FSM diagram
+
+![](https://i.imgur.com/uv7XFTc.png)
 
 ## Reference
 
