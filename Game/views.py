@@ -34,12 +34,12 @@ parser = WebhookParser(channel_secret)
 states = ['reset', 'idle', 'usage', 'info', 'reply', 'judge']
 transitions = [
     {
-        'trigger': 'go_back',
+        'trigger': 'forward',
         'source': ['reset', 'usage', 'info', 'reply'],
         'dest': 'idle'
     },
     {
-        'trigger': 'goto_reset',
+        'trigger': 'forward',
         'source': 'judge',
         'dest': 'reset'
     },
@@ -109,7 +109,7 @@ def webhook(request):
                     auto_transitions = auto_transitions,
                     show_conditions = show_conditions,
                 )
-                machine.go_back()
+                machine.forward()
 
                 player = Player.objects.create(user_id = uid)
 

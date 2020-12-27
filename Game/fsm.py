@@ -28,7 +28,7 @@ class GameMachine(GraphMachine):
         return len(param) == 2 and param[0] == '!' and param[1].isdigit()
 
     def on_enter_reset(self, event):
-        self.go_back()
+        self.forward()
 
     def on_exit_reset(self):
         send_push_message(
@@ -64,7 +64,7 @@ you can try to figure out how to do that. ^^)'''
     None of above : Print this message.'''
         )
 
-        self.go_back()
+        self.forward()
 
     def on_enter_info(self, event):
         status = f'''Remain:
@@ -76,7 +76,7 @@ you can try to figure out how to do that. ^^)'''
             text = status
         )
 
-        self.go_back()
+        self.forward()
 
     def on_enter_reply(self, event):
         if self.remain_eggs == 0:
@@ -102,7 +102,7 @@ you can try to figure out how to do that. ^^)'''
                 text = 'Broken' if broken else 'Safe'
             )
 
-        self.go_back()
+        self.forward()
 
     def on_enter_judge(self, event):
         param = event.message.text.split()
@@ -112,4 +112,4 @@ you can try to figure out how to do that. ^^)'''
             text = 'Correct!' if int(param[1]) == self.ans else 'Wrong answer :('
         )
 
-        self.goto_reset(event)
+        self.forward(event)
