@@ -21,11 +21,21 @@ class GameMachine(GraphMachine):
 
     def query(self, event): # "? xxx"
         param = event.message.text.split()
-        return len(param) == 2 and param[0] == '?' and param[1].isdigit()
+
+        if len(param) == 1:
+            return param[0] == '?' and param[1:].isdigit()
+        if len(param) == 2:
+            return param[0] == '?' and param[1].isdigit()
+        return False
 
     def answer(self, event): # "! xxx"
         param = event.message.text.split()
-        return len(param) == 2 and param[0] == '!' and param[1].isdigit()
+
+        if len(param) == 1:
+            return param[0] == '!' and param[1:].isdigit()
+        if len(param) == 2:
+            return param[0] == '!' and param[1].isdigit()
+        return False
 
     def on_enter_reset(self, event):
         self.forward()
